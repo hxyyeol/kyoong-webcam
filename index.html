@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Kyoong Web Cam ★</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── Flash de cámara ── -->
+  <div class="flash" id="flash"></div>
+
+  <!-- ════════════════════════════════════════
+       PANTALLA DE INICIO
+  ════════════════════════════════════════ -->
+  <div class="screen active polka-bg" id="startScreen">
+
+    <!-- Estrellas flotantes de fondo -->
+    <div class="bg-star" style="top:8%;left:6%;--sz:28px;--dur:4s;--del:-1s">⭐</div>
+    <div class="bg-star" style="top:15%;right:9%;--sz:22px;--dur:5s;--del:-2s">🌸</div>
+    <div class="bg-star" style="top:70%;left:5%;--sz:26px;--dur:6s;--del:-.5s">✦</div>
+    <div class="bg-star" style="top:68%;right:7%;--sz:20px;--dur:4.5s;--del:-3s">💚</div>
+    <div class="bg-star" style="top:38%;left:3%;--sz:18px;--dur:5.5s;--del:-1.5s">★</div>
+    <div class="bg-star" style="top:82%;left:22%;--sz:24px;--dur:4.2s;--del:-2.2s">🩷</div>
+    <div class="bg-star" style="top:9%;right:24%;--sz:16px;--dur:5s;--del:-.8s">✧</div>
+    <div class="bg-star" style="top:55%;right:4%;--sz:28px;--dur:4.8s;--del:-1.8s">🌼</div>
+
+    <div class="start-content">
+
+      <!-- Logo Kyoong -->
+      <div class="logo-stack">
+        <div class="logo-eyebrow">✦ GACHA PHOTO BOOTH ✦</div>
+        <div class="logo-bubble">
+          <!-- Cada letra tiene su color y animación individual -->
+          <span class="lb-k">K</span>
+          <span class="lb-y">y</span>
+          <span class="lb-o">♥</span>
+          <span class="lb-o2">♥</span>
+          <span class="lb-n">n</span>
+          <span class="lb-g">g</span>
+        </div>
+        <span class="logo-cam">WEB CAM ★</span>
+      </div>
+
+      <!-- Caja de inicio estilo consola -->
+      <div class="console-shell-start">
+        <div class="console-stripe"></div>
+        <div class="load-track">
+          <div class="load-fill" style="width:0%"></div>
+        </div>
+        <div class="load-txt" id="loadTxt">Loading...</div>
+        <button class="btn-start" onclick="goToGame()">▶ START!</button>
+        <div class="start-credit"> BY BAEKHYUN MTY ✦ 2025</div>
+      </div>
+
+    </div>
+  </div><!-- /startScreen -->
+
+
+  <!-- ════════════════════════════════════════
+       PANTALLA DE JUEGO
+  ════════════════════════════════════════ -->
+  <div class="screen polka-bg" id="gameScreen">
+
+    <div class="bg-star" style="top:3%;left:3%;--sz:20px;--dur:5s;--del:-1s;z-index:1">⭐</div>
+    <div class="bg-star" style="top:6%;right:4%;--sz:16px;--dur:4s;--del:-2s;z-index:1">🌸</div>
+
+    <!-- Carcasa de consola -->
+    <div class="console">
+
+      <!-- Barra superior -->
+      <div class="console-top-bar">
+        <div class="console-brand">✦ Kyoong Web Cam</div>
+        <div class="console-hearts">
+          <span>♥</span><span>♥</span><span>♥</span>
+        </div>
+      </div>
+
+      <!-- Cuerpo principal: strip izquierda + controles derecha -->
+      <div class="console-body">
+
+        <!-- IZQUIERDA: strip de fotos en vivo -->
+        <div class="strip-column">
+          <div style="position:relative">
+            <div class="photo-strip-live" id="stripLive">
+
+              <!-- Slot 1 (slot activo al inicio, tiene el video) -->
+              <div class="strip-slot active-slot" id="slot0">
+                <video id="videoEl" autoplay playsinline muted></video>
+                <canvas id="slotCanvas0" style="width:100%;height:100%;display:none;background:#1a1a1a"></canvas>
+                <canvas class="slot-frame-canvas" id="slotCanvasF0"></canvas>
+              </div>
+
+              <!-- Slots 2, 3 y 4 (se llenan con las fotos capturadas) -->
+              <div class="strip-slot" id="slot1">
+                <canvas id="slotCanvas1" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
+                <canvas class="slot-frame-canvas" id="slotCanvasF1"></canvas>
+              </div>
+              <div class="strip-slot" id="slot2">
+                <canvas id="slotCanvas2" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
+                <canvas class="slot-frame-canvas" id="slotCanvasF2"></canvas>
+              </div>
+              <div class="strip-slot" id="slot3">
+                <canvas id="slotCanvas3" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
+                <canvas class="slot-frame-canvas" id="slotCanvasF3"></canvas>
+              </div>
+
+              <!-- Overlay "sin cámara" -->
+              <div class="no-cam-strip" id="noCamStrip">
+                <span class="ncs-icon">📷</span>
+                <span class="ncs-txt">ACTIVA<br>CÁMARA</span>
+              </div>
+
+            </div>
+          </div>
+          <!-- Contador de fotos tomadas -->
+          <div class="shot-counter" id="shotCounter">0 / 4</div>
+        </div>
+
+        <!-- DERECHA: controles -->
+        <div class="ctrl-column">
+
+          <!-- Panel del frame actual -->
+          <div class="frame-panel">
+            <div class="panel-label">🎞 TU FRAME</div>
+            <div class="frame-reveal-area">
+
+              <!-- Preview del frame (1:3, bloqueado hasta hacer roll) -->
+              <div class="frame-thumb-box locked" id="framThumbBox">
+                <div class="lock-inner" id="lockInner">
+                  <span>🔒</span>
+                  <span>HAZ<br>ROLL</span>
+                </div>
+              </div>
+
+              <!-- Info del frame obtenido -->
+              <div class="frame-info">
+                <div class="fi-status" id="fiStatus">SIN FRAME</div>
+                <div class="fi-name empty" id="fiName">— — —</div>
+                <div class="rarity-bubble rb-locked" id="fiRarity">🔒 LOCKED</div>
+                <div class="roll-blink" id="rollBlink">▶ HAZ ROLL<br>PRIMERO!</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Botones Roll + Cámara -->
+          <div class="btn-row">
+            <button class="btn btn-gacha" onclick="doGacha()">🎲 Roll</button>
+            <button class="btn btn-cam"   onclick="startCam()">📷 Cámara</button>
+          </div>
+
+          <!-- Botón tomar foto (deshabilitado hasta tener cámara + frame) -->
+          <button class="btn btn-snap" id="snapBtn" onclick="takeSnap()" disabled>
+            ✨ ¡FOTO! ✨
+          </button>
+
+          <!-- Resultado final (aparece cuando se completan las 4 fotos) -->
+          <div class="result-section" id="resultSection">
+            <div class="result-title">🎉 ¡Strip Completo!</div>
+            <div class="final-strip-wrap">
+              <canvas id="finalCanvas" width="200" height="600"></canvas>
+            </div>
+            <button class="btn btn-dl" onclick="dlStrip()">💾 Descargar</button>
+            <button class="btn btn-reset" onclick="resetStrip()">🔄 Nueva Sesión</button>
+          </div>
+
+        </div><!-- /ctrl-column -->
+      </div><!-- /console-body -->
+
+      <!-- Bumpers inferiores de la consola -->
+      <div class="console-bottom">
+        <div class="bumper"></div>
+        <div class="console-brand-bottom">KYOONG ★ 2025</div>
+        <div class="bumper"></div>
+      </div>
+
+    </div><!-- /console -->
+  </div><!-- /gameScreen -->
+
+
+
+  <!-- ════════════════════════════════════════
+       OVERLAY GACHA (aparece al hacer Roll)
+  ════════════════════════════════════════ -->
+  <div id="gachaOverlay">
+    <div class="gp-layer" id="gpLayer"></div>
+    <div class="g-card-outer" id="gCardOuter"></div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/frames.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
