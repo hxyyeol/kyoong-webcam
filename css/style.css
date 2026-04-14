@@ -178,8 +178,8 @@ body {
 
 .lb-k { color: var(--green);  -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--green3);  display: inline-block; animation: wob 2.5s ease-in-out infinite 0s; }
 .lb-y { color: var(--pink);   -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--pink3);   display: inline-block; animation: wob 2.5s ease-in-out infinite .15s; }
-.lb-o { color: var(--yellow); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--yellow3); display: inline-block; animation: wob 2.5s ease-in-out infinite .3s; }
-.lb-o2{ color: var(--pink);   -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--pink3);   display: inline-block; animation: wob 2.5s ease-in-out infinite .45s; }
+.lb-o { color: var(--pink2);  -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--pink3);   display: inline-block; animation: wob 2.5s ease-in-out infinite .3s; }
+.lb-o2{ color: var(--pink2);  -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--pink3);   display: inline-block; animation: wob 2.5s ease-in-out infinite .45s; }
 .lb-n { color: var(--green);  -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--green3);  display: inline-block; animation: wob 2.5s ease-in-out infinite .6s; }
 .lb-g { color: var(--pink);   -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--pink3);   display: inline-block; animation: wob 2.5s ease-in-out infinite .75s; }
 
@@ -298,9 +298,9 @@ body {
   overflow: hidden;
   align-items: center;
   justify-content: center;
-  padding: max(env(safe-area-inset-top), 12px) 12px max(env(safe-area-inset-bottom), 12px);
-  min-height: 100dvh;
-  overflow-y: auto;
+  padding: max(env(safe-area-inset-top), 8px) 8px max(env(safe-area-inset-bottom), 8px);
+  height: 100dvh;
+  height: 100vh;
 }
 
 /* Carcasa exterior */
@@ -317,13 +317,16 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  /* Llenar el alto disponible sin salirse de pantalla */
+  max-height: calc(100dvh - max(env(safe-area-inset-top), 8px) - max(env(safe-area-inset-bottom), 8px) - 16px);
+  max-height: calc(100vh - 16px);
 }
 
 /* Barra superior de la consola */
 .console-top-bar {
   background: var(--pink2);
   border-bottom: 4px solid var(--ink);
-  padding: 9px 16px;
+  padding: 7px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -353,19 +356,42 @@ body {
   font-size: clamp(9px, 2.5vw, 11px);
 }
 
-/* Layout: strip izquierda | controles derecha */
-.console-body {
-  display: flex;
-  flex-direction: row;
-  min-height: 0;
+/* Layout: strip centrado, ocupa todo el alto disponible */
+.console-body { display: none; } /* ya no se usa */
+
+/* Área central del strip */
+.strip-area {
   flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--yellow2);
+  position: relative;
+  overflow: hidden;
 }
+
+/* Frame thumb overlay — esquina superior derecha del strip */
+.frame-thumb-overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+}
+
+.frame-thumb-overlay .frame-thumb-box {
+  width: 36px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.frame-thumb-overlay .lock-inner span:first-child { font-size: .8rem; }
+.frame-thumb-overlay .lock-inner span:last-child  { font-size: 4px; }
 
 /* Bumpers inferiores */
 .console-bottom {
   background: var(--yellow2);
   border-top: 4px solid var(--ink);
-  padding: 8px 18px;
+  padding: 6px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -393,26 +419,16 @@ body {
 /* ============================================================
    6. STRIP DE FOTOS (columna izquierda)
    ============================================================ */
-.strip-column {
-  flex: 0 0 auto;
-  background: var(--yellow2);
-  border-right: 4px solid var(--ink);
-  padding: 10px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Contenedor del strip 1:3 (2×6 pulgadas) */
+/* Strip de fotos: ahora llena el alto del área central */
 .photo-strip-live {
   position: relative;
-  width: clamp(80px, 22vw, 110px);
+  height: 100%;
   aspect-ratio: 1 / 3;
-  border-radius: 8px;
+  max-width: 100%;
+  border-radius: 0;
   overflow: hidden;
-  border: 3px solid var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
+  border: none;
+  box-shadow: none;
   background: #111;
   flex-shrink: 0;
 }
@@ -515,15 +531,90 @@ body {
 /* ============================================================
    7. CONTROLES (columna derecha)
    ============================================================ */
-.ctrl-column {
-  flex: 1;
+/* Barra inferior de controles */
+.bottom-bar {
+  flex-shrink: 0;
+  background: var(--white);
+  border-top: 4px solid var(--ink);
+  padding: 8px 10px 6px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  gap: 10px;
-  min-width: 0;
-  overflow-y: auto;
+  gap: 6px;
 }
+
+/* Info compacta: contador + frame */
+.bottom-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+}
+
+.frame-info-compact {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Botones en fila de 4 */
+.bottom-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  gap: 6px;
+}
+
+/* Botón eliminar */
+.btn-delete {
+  background: var(--orange);
+  color: var(--ink);
+  font-size: 1.1rem;
+}
+
+/* Overlay resultado — aparece encima del strip al completar */
+.result-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(26,0,51,.88);
+  z-index: 20;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.result-overlay.show { display: flex; }
+
+.result-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  width: 100%;
+}
+
+.result-title {
+  font-family: var(--bubble);
+  font-size: clamp(.9rem, 4vw, 1.1rem);
+  color: var(--orange);
+  -webkit-text-stroke: .5px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.3);
+}
+
+.final-strip-wrap {
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 var(--ink);
+  overflow: hidden;
+  height: clamp(140px, 35vh, 220px);
+  aspect-ratio: 1 / 3;
+}
+
+.final-strip-wrap canvas { width: 100%; height: 100%; display: block; }
 
 /* ── Panel del frame ── */
 .frame-panel {
@@ -1011,7 +1102,8 @@ body {
   .logo-cam              { font-size: 2rem; }
   .console-shell-start   { width: 360px; }
 
-  .console               { max-width: 580px; }
+  #gameScreen            { padding: 20px 20px; }
+  .console               { max-width: 580px; max-height: calc(100vh - 40px); }
   .photo-strip-live      { width: 128px; }
   .frame-thumb-box       { width: 68px; }
 

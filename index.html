@@ -41,8 +41,8 @@
           <!-- Cada letra tiene su color y animación individual -->
           <span class="lb-k">K</span>
           <span class="lb-y">y</span>
-          <span class="lb-o">♥</span>
-          <span class="lb-o2">♥</span>
+          <span class="lb-o">o</span>
+          <span class="lb-o2">o</span>
           <span class="lb-n">n</span>
           <span class="lb-g">g</span>
         </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="load-txt" id="loadTxt">Loading...</div>
         <button class="btn-start" onclick="goToGame()">▶ START!</button>
-        <div class="start-credit"> BY BAEKHYUN MTY ✦ 2025</div>
+        <div class="start-credit">STAFF FRAMES EDITION ✦ 2025</div>
       </div>
 
     </div>
@@ -83,87 +83,52 @@
         </div>
       </div>
 
-      <!-- Cuerpo principal: strip izquierda + controles derecha -->
-      <div class="console-body">
+      <!-- Área central: strip grande + frame thumb overlay -->
+      <div class="strip-area">
 
-        <!-- IZQUIERDA: strip de fotos en vivo -->
-        <div class="strip-column">
-          <div style="position:relative">
-            <div class="photo-strip-live" id="stripLive">
-
-              <!-- Slot 1 (slot activo al inicio, tiene el video) -->
-              <div class="strip-slot active-slot" id="slot0">
-                <video id="videoEl" autoplay playsinline muted></video>
-                <canvas id="slotCanvas0" style="width:100%;height:100%;display:none;background:#1a1a1a"></canvas>
-                <canvas class="slot-frame-canvas" id="slotCanvasF0"></canvas>
-              </div>
-
-              <!-- Slots 2, 3 y 4 (se llenan con las fotos capturadas) -->
-              <div class="strip-slot" id="slot1">
-                <canvas id="slotCanvas1" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
-                <canvas class="slot-frame-canvas" id="slotCanvasF1"></canvas>
-              </div>
-              <div class="strip-slot" id="slot2">
-                <canvas id="slotCanvas2" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
-                <canvas class="slot-frame-canvas" id="slotCanvasF2"></canvas>
-              </div>
-              <div class="strip-slot" id="slot3">
-                <canvas id="slotCanvas3" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
-                <canvas class="slot-frame-canvas" id="slotCanvasF3"></canvas>
-              </div>
-
-              <!-- Overlay "sin cámara" -->
-              <div class="no-cam-strip" id="noCamStrip">
-                <span class="ncs-icon">📷</span>
-                <span class="ncs-txt">ACTIVA<br>CÁMARA</span>
-              </div>
-
+        <!-- Miniatura del frame (overlay esquina superior derecha) -->
+        <div class="frame-thumb-overlay">
+          <div class="frame-thumb-box locked" id="framThumbBox">
+            <div class="lock-inner" id="lockInner">
+              <span>🔒</span>
+              <span>ROLL</span>
             </div>
           </div>
-          <!-- Contador de fotos tomadas -->
-          <div class="shot-counter" id="shotCounter">0 / 4</div>
         </div>
 
-        <!-- DERECHA: controles -->
-        <div class="ctrl-column">
+        <!-- Strip de fotos en vivo -->
+        <div class="photo-strip-live" id="stripLive">
 
-          <!-- Panel del frame actual -->
-          <div class="frame-panel">
-            <div class="panel-label">🎞 TU FRAME</div>
-            <div class="frame-reveal-area">
-
-              <!-- Preview del frame (1:3, bloqueado hasta hacer roll) -->
-              <div class="frame-thumb-box locked" id="framThumbBox">
-                <div class="lock-inner" id="lockInner">
-                  <span>🔒</span>
-                  <span>HAZ<br>ROLL</span>
-                </div>
-              </div>
-
-              <!-- Info del frame obtenido -->
-              <div class="frame-info">
-                <div class="fi-status" id="fiStatus">SIN FRAME</div>
-                <div class="fi-name empty" id="fiName">— — —</div>
-                <div class="rarity-bubble rb-locked" id="fiRarity">🔒 LOCKED</div>
-                <div class="roll-blink" id="rollBlink">▶ HAZ ROLL<br>PRIMERO!</div>
-              </div>
-
-            </div>
+          <div class="strip-slot active-slot" id="slot0">
+            <video id="videoEl" autoplay playsinline muted></video>
+            <canvas id="slotCanvas0" style="width:100%;height:100%;display:none;background:#1a1a1a"></canvas>
+            <canvas class="slot-frame-canvas" id="slotCanvasF0"></canvas>
           </div>
 
-          <!-- Botones Roll + Cámara -->
-          <div class="btn-row">
-            <button class="btn btn-gacha" onclick="doGacha()">🎲 Roll</button>
-            <button class="btn btn-cam"   onclick="startCam()">📷 Cámara</button>
+          <div class="strip-slot" id="slot1">
+            <canvas id="slotCanvas1" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
+            <canvas class="slot-frame-canvas" id="slotCanvasF1"></canvas>
+          </div>
+          <div class="strip-slot" id="slot2">
+            <canvas id="slotCanvas2" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
+            <canvas class="slot-frame-canvas" id="slotCanvasF2"></canvas>
+          </div>
+          <div class="strip-slot" id="slot3">
+            <canvas id="slotCanvas3" style="width:100%;height:100%;display:block;background:#1a1a1a"></canvas>
+            <canvas class="slot-frame-canvas" id="slotCanvasF3"></canvas>
           </div>
 
-          <!-- Botón tomar foto (deshabilitado hasta tener cámara + frame) -->
-          <button class="btn btn-snap" id="snapBtn" onclick="takeSnap()" disabled>
-            ✨ ¡FOTO! ✨
-          </button>
+          <!-- Overlay "sin cámara" -->
+          <div class="no-cam-strip" id="noCamStrip">
+            <span class="ncs-icon">📷</span>
+            <span class="ncs-txt">ACTIVA<br>CÁMARA</span>
+          </div>
 
-          <!-- Resultado final (aparece cuando se completan las 4 fotos) -->
-          <div class="result-section" id="resultSection">
+        </div>
+
+        <!-- Overlay resultado (aparece al completar las 4 fotos) -->
+        <div class="result-overlay" id="resultSection">
+          <div class="result-inner">
             <div class="result-title">🎉 ¡Strip Completo!</div>
             <div class="final-strip-wrap">
               <canvas id="finalCanvas" width="200" height="600"></canvas>
@@ -171,11 +136,35 @@
             <button class="btn btn-dl" onclick="dlStrip()">💾 Descargar</button>
             <button class="btn btn-reset" onclick="resetStrip()">🔄 Nueva Sesión</button>
           </div>
+        </div>
 
-        </div><!-- /ctrl-column -->
-      </div><!-- /console-body -->
+      </div><!-- /strip-area -->
 
-      <!-- Bumpers inferiores de la consola -->
+      <!-- Barra inferior de controles -->
+      <div class="bottom-bar">
+
+        <!-- Info: frame actual + contador -->
+        <div class="bottom-info">
+          <div class="shot-counter" id="shotCounter">0 / 4</div>
+          <div class="frame-info-compact">
+            <div class="fi-status" id="fiStatus">SIN FRAME</div>
+            <div class="fi-name empty" id="fiName">— — —</div>
+            <div class="rarity-bubble rb-locked" id="fiRarity">🔒 LOCKED</div>
+            <div class="roll-blink" id="rollBlink">▶ HAZ ROLL PRIMERO!</div>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="bottom-buttons">
+          <button class="btn btn-gacha" onclick="doGacha()">🎲 Roll</button>
+          <button class="btn btn-cam"   onclick="startCam()">📷</button>
+          <button class="btn btn-delete" id="deleteBtn" onclick="deleteSnap()" disabled>🗑️</button>
+          <button class="btn btn-snap"  id="snapBtn" onclick="takeSnap()" disabled>✨ FOTO</button>
+        </div>
+
+      </div><!-- /bottom-bar -->
+
+      <!-- Bumpers inferiores -->
       <div class="console-bottom">
         <div class="bumper"></div>
         <div class="console-brand-bottom">KYOONG ★ 2025</div>

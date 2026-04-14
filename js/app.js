@@ -78,8 +78,6 @@ function updateFramePanel(idx) {
   cv.className  = 'frame-in';
   box.appendChild(cv);
   const ctx = cv.getContext('2d');
-  ctx.fillStyle = '#fffde8';
-  ctx.fillRect(0, 0, 60, 180);
   f.draw(ctx, 60, 180);
 
   // Actualizar textos
@@ -172,6 +170,7 @@ async function startCam() {
 
     document.getElementById('noCamStrip').style.display = 'none';
     updateSnapBtn();
+  updateDeleteBtn();
     if (!looping) liveLoop();
 
   } catch (e) {
@@ -197,6 +196,61 @@ function liveLoop() {
 function updateSnapBtn() {
   const ready = camActive && hasRolled && shotsTaken < MAX_SHOTS;
   document.getElementById('snapBtn').disabled = !ready;
+}
+
+function updateDeleteBtn() {
+  const btn = document.getElementById('deleteBtn');
+  if (btn) btn.disabled = shotsTaken === 0;
+}
+
+/**
+ * Elimina la última foto tomada y devuelve la cámara a ese slot.
+ */
+function deleteSnap() {
+  if (shotsTaken === 0) return;
+
+  shotsTaken--;
+  const idx = shotsTaken;
+
+  // Limpiar foto HD
+  slotPhotosHD[idx] = null;
+
+  // Limpiar canvas de foto
+  const sc = document.getElementById('slotCanvas' + idx);
+  if (sc) {
+    const ctx = sc.getContext('2d');
+    ctx.clearRect(0, 0, sc.width, sc.height);
+    if (idx === 0) sc.style.display = 'none';
+  }
+
+  // Limpiar canvas de frame overlay
+  const fsc = document.getElementById('slotCanvasF' + idx);
+  if (fsc) {
+    const fctx = fsc.getContext('2d');
+    fctx.clearRect(0, 0, fsc.width, fsc.height);
+  }
+
+  // Quitar clases del slot siguiente (ya no es activo)
+  const nextSlot = document.getElementById('slot' + (idx + 1));
+  if (nextSlot) nextSlot.classList.remove('active-slot');
+
+  // Restaurar slot eliminado como activo
+  const delSlot = document.getElementById('slot' + idx);
+  delSlot.classList.remove('taken');
+  delSlot.classList.add('active-slot');
+
+  // Devolver video a ese slot
+  const v = document.getElementById('videoEl');
+  v.style.display = 'block';
+  delSlot.insertBefore(v, delSlot.firstChild);
+
+  // Ocultar resultado si estaba visible
+  document.getElementById('resultSection').classList.remove('show');
+
+  document.getElementById('shotCounter').textContent = `${shotsTaken} / ${MAX_SHOTS}`;
+  updateSnapBtn();
+  updateDeleteBtn();
+  updateDeleteBtn();
 }
 
 
@@ -303,8 +357,10 @@ function takeSnap() {
     v.style.display = 'block';
     nextSlot.insertBefore(v, nextSlot.firstChild);
     updateSnapBtn();
+  updateDeleteBtn();
   } else {
     updateSnapBtn();
+  updateDeleteBtn();
     buildFinalStrip();
   }
 }
@@ -418,6 +474,7 @@ function resetStrip() {
   document.getElementById('slot0').insertBefore(v, document.getElementById('slot0').firstChild);
 
   updateSnapBtn();
+  updateDeleteBtn();
 }
 
 
@@ -499,8 +556,6 @@ function showOverlay(idx) {
     const pc = document.getElementById(pid);
     if (pc) {
       const ctx = pc.getContext('2d');
-      ctx.fillStyle = '#fffde8';
-      ctx.fillRect(0, 0, 60, 180);
       f.draw(ctx, 60, 180);
     }
   }, 60);
@@ -525,6 +580,7 @@ function useFrame(idx) {
   hasRolled  = true;
   updateFramePanel(idx);
   updateSnapBtn();
+  updateDeleteBtn();
 }
 
 
