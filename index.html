@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Kyoong Web Cam ★</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@800;900&family=Press+Start+2P&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+
+<!-- ══════════════════════════════════════════
+     START SCREEN
+══════════════════════════════════════════ -->
+<div class="screen active" id="startScreen" style="background:radial-gradient(circle,rgba(255,45,120,.22) 1.6px,transparent 1.6px) 0 0/14px 14px,linear-gradient(180deg,#FFF6D9 0%,#FFE1B8 30%,#FFC9E0 65%,#FF6BAE 100%);align-items:center;justify-content:center;position:relative;overflow:hidden;">
+
+  <div style="position:relative;z-index:2;width:min(95%,500px);display:flex;flex-direction:column;align-items:center;">
+    <span class="logo-eyebrow" style="margin-bottom:14px">✦ GACHA PHOTO BOOTH ✦</span>
+
+    <div style="width:100%;filter:drop-shadow(0 8px 0 rgba(255,45,120,.35)) drop-shadow(0 14px 22px rgba(255,45,120,.28));cursor:pointer;animation:popBounce .9s cubic-bezier(.175,.885,.32,1.275) both;" onclick="startGame()">
+      <svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;overflow:visible">
+        <defs>
+          <linearGradient id="shell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE1B8"/><stop offset=".4" stop-color="#FFC9E0"/><stop offset="1" stop-color="#FF6BAE"/></linearGradient>
+          <linearGradient id="shellInner" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D9"/><stop offset="1" stop-color="#FFB3D0"/></linearGradient>
+          <pattern id="spkDots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1.8" fill="#FF2D78" opacity=".55"/></pattern>
+          <linearGradient id="screenBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D9"/><stop offset=".6" stop-color="#FFE1B8"/><stop offset="1" stop-color="#FFC9E0"/></linearGradient>
+          <linearGradient id="btnGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFCCE0"/><stop offset="55%" stop-color="#FF2D78"/><stop offset="100%" stop-color="#CC0060"/></linearGradient>
+        </defs>
+        <ellipse cx="260" cy="170" rx="250" ry="165" fill="url(#shell)" stroke="#FF2D78" stroke-width="5"/>
+        <ellipse cx="260" cy="170" rx="228" ry="144" fill="url(#shellInner)" stroke="#FF2D78" stroke-width="3"/>
+        <rect x="230" y="28" width="60" height="12" fill="url(#spkDots)"/>
+        <rect x="115" y="68" width="290" height="188" rx="16" fill="#FF6BAE" stroke="#FF2D78" stroke-width="4"/>
+        <rect x="127" y="80" width="266" height="164" rx="10" fill="url(#screenBg)" stroke="#FF2D78" stroke-width="2"/>
+        <text x="260" y="120" text-anchor="middle" font-family="'Press Start 2P',monospace" font-size="11" fill="#FF2D78" letter-spacing="2">KYOONG WEB CAM</text>
+        <text x="260" y="162" text-anchor="middle" font-family="'Lilita One','Arial Black',cursive" font-size="38" fill="#FFF6D9" stroke="#FF2D78" stroke-width="3.5" stroke-linejoin="round" style="paint-order:stroke fill" letter-spacing="2">READY ★</text>
+        <rect x="163" y="189" width="194" height="32" rx="16" fill="#99003F"/>
+        <rect x="163" y="185" width="194" height="32" rx="16" fill="url(#btnGrad)" stroke="#CC0060" stroke-width="2.5"/>
+        <rect x="173" y="187" width="174" height="13" rx="8" fill="rgba(255,255,255,.32)"/>
+        <ellipse cx="192" cy="192" rx="10" ry="5" fill="rgba(255,255,255,.7)"/>
+        <text id="startBlink" x="260" y="207" text-anchor="middle" font-family="'Press Start 2P',monospace" font-size="7.5" fill="#FFF6D9" stroke="#99003F" stroke-width=".8" style="paint-order:stroke fill" letter-spacing="1.5">▶ PRESS TO START ◀</text>
+        <path d="M 504 152 Q 521 170,504 188" fill="none" stroke="#FF2D78" stroke-width="6" stroke-linecap="round"/>
+        <rect x="148" y="270" width="224" height="18" rx="9" fill="none" stroke="#FF2D78" stroke-width="2" opacity=".5"/>
+        <text x="260" y="282" text-anchor="middle" font-family="'Press Start 2P',monospace" font-size="6.5" fill="rgba(26,0,51,.45)" letter-spacing="2">BY BAEKHYUN MTY ✦ 2025</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Floating sticker stars & hearts -->
+  <div class="bg-star" style="top:8%;left:5%;--dur:4s;--del:-1s;position:absolute;z-index:3"><svg width="58" height="58" viewBox="-30 -30 60 60" overflow="visible"><defs><filter id="dsk1" x="-25%" y="-25%" width="150%" height="150%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="g"/><feGaussianBlur in="g" stdDeviation="1.8" result="b"/><feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="8" intercept="-2"/></feComponentTransfer><feFlood flood-color="#fff"/><feComposite in2="s" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="dsg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D9"/><stop offset="1" stop-color="#FFB3D0"/></linearGradient></defs><path filter="url(#dsk1)" d="M 0 -22 L 6.5 -7 L 22 -7 L 9.5 3 L 14 18 L 0 9.5 L -14 18 L -9.5 3 L -22 -7 L -6.5 -7 Z" fill="url(#dsg1)" stroke="#FF2D78" stroke-width="3" stroke-linejoin="round" style="paint-order:stroke fill"/></svg></div>
+  <div class="bg-star" style="top:9%;right:7%;--dur:3.4s;--del:-1s;position:absolute;z-index:3"><svg width="52" height="52" viewBox="-28 -28 56 56" overflow="visible"><defs><filter id="dsk2" x="-25%" y="-25%" width="150%" height="150%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="g"/><feGaussianBlur in="g" stdDeviation="1.8" result="b"/><feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="8" intercept="-2"/></feComponentTransfer><feFlood flood-color="#fff"/><feComposite in2="s" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="dhg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB3D0"/><stop offset="1" stop-color="#FF2D78"/></linearGradient></defs><path filter="url(#dsk2)" d="M 0 20 C -18 8,-22 -8,-12 -16 C -4 -22,0 -14,0 -8 C 0 -14,4 -22,12 -16 C 22 -8,18 8,0 20 Z" fill="url(#dhg1)" stroke="#FF2D78" stroke-width="3" stroke-linejoin="round" style="paint-order:stroke fill"/></svg></div>
+  <div class="bg-star" style="top:42%;left:3%;--dur:3.8s;--del:-2s;position:absolute;z-index:3"><svg width="40" height="40" viewBox="-28 -28 56 56" overflow="visible"><defs><filter id="dsk3" x="-25%" y="-25%" width="150%" height="150%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="g"/><feGaussianBlur in="g" stdDeviation="1.8" result="b"/><feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="8" intercept="-2"/></feComponentTransfer><feFlood flood-color="#fff"/><feComposite in2="s" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="dsg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D9"/><stop offset="1" stop-color="#FFB3D0"/></linearGradient></defs><path filter="url(#dsk3)" d="M 0 -22 L 6.5 -7 L 22 -7 L 9.5 3 L 14 18 L 0 9.5 L -14 18 L -9.5 3 L -22 -7 L -6.5 -7 Z" fill="url(#dsg2)" stroke="#FF2D78" stroke-width="3.5" stroke-linejoin="round" style="paint-order:stroke fill"/></svg></div>
+  <div class="bg-star" style="top:44%;right:3%;--dur:3.2s;--del:-1.4s;position:absolute;z-index:3"><svg width="44" height="44" viewBox="-28 -28 56 56" overflow="visible"><defs><filter id="dsk4" x="-25%" y="-25%" width="150%" height="150%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="g"/><feGaussianBlur in="g" stdDeviation="1.8" result="b"/><feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="8" intercept="-2"/></feComponentTransfer><feFlood flood-color="#fff"/><feComposite in2="s" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="dhg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB3D0"/><stop offset="1" stop-color="#FF2D78"/></linearGradient></defs><path filter="url(#dsk4)" d="M 0 20 C -18 8,-22 -8,-12 -16 C -4 -22,0 -14,0 -8 C 0 -14,4 -22,12 -16 C 22 -8,18 8,0 20 Z" fill="url(#dhg2)" stroke="#FF2D78" stroke-width="3.5" stroke-linejoin="round" style="paint-order:stroke fill"/></svg></div>
+  <div class="bg-star" style="bottom:9%;left:10%;--dur:3.6s;--del:-.7s;position:absolute;z-index:3"><svg width="48" height="48" viewBox="-28 -28 56 56" overflow="visible"><defs><filter id="dsk5" x="-25%" y="-25%" width="150%" height="150%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="g"/><feGaussianBlur in="g" stdDeviation="1.8" result="b"/><feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="8" intercept="-2"/></feComponentTransfer><feFlood flood-color="#fff"/><feComposite in2="s" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="dhg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB3D0"/><stop offset="1" stop-color="#FF2D78"/></linearGradient></defs><path filter="url(#dsk5)" d="M 0 20 C -18 8,-22 -8,-12 -16 C -4 -22,0 -14,0 -8 C 0 -14,4 -22,12 -16 C 22 -8,18 8,0 20 Z" fill="url(#dhg3)" stroke="#FF2D78" stroke-width="3.5" stroke-linejoin="round" style="paint-order:stroke fill"/></svg></div>
+  <div class="bg-star" style="bottom:6%;right:12%;--dur:3.2s;--del:-2.3s;position:absolute;z-index:3"><svg width="54" height="54" viewBox="-30 -30 60 60" overflow="visible"><defs><filter id="dsk6" x="-25%" y="-25%" width="150%" height="150%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="g"/><feGaussianBlur in="g" stdDeviation="1.8" result="b"/><feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="8" intercept="-2"/></feComponentTransfer><feFlood flood-color="#fff"/><feComposite in2="s" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="dsg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D9"/><stop offset="1" stop-color="#FFB3D0"/></linearGradient></defs><path filter="url(#dsk6)" d="M 0 -22 L 6.5 -7 L 22 -7 L 9.5 3 L 14 18 L 0 9.5 L -14 18 L -9.5 3 L -22 -7 L -6.5 -7 Z" fill="url(#dsg3)" stroke="#FF2D78" stroke-width="3.5" stroke-linejoin="round" style="paint-order:stroke fill"/></svg></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     GAME SCREEN
+══════════════════════════════════════════ -->
+<div class="screen" id="gameScreen" style="background:radial-gradient(circle,rgba(255,45,120,.22) 1.6px,transparent 1.6px) 0 0/14px 14px,linear-gradient(180deg,#FFF6D9 0%,#FFE1B8 30%,#FFC9E0 65%,#FF6BAE 100%);align-items:center;justify-content:center;position:relative;overflow:hidden;padding:8px;height:100dvh;">
+
+  <!-- Streamers -->
+  <div class="streamer" style="left:2%;--dur:9s;--del:0s;--r0:-5deg;--r1:7deg"><svg viewBox="-20 0 40 600" preserveAspectRatio="none"><path d="M 0 0 C -16 60,16 120,0 180 S -16 300,0 360 S 16 480,0 600" fill="none" stroke="#FF2D78" stroke-width="9" stroke-linecap="round" opacity=".45"/></svg></div>
+  <div class="streamer" style="left:15%;--dur:13s;--del:-4s;--r0:5deg;--r1:-7deg"><svg viewBox="-20 0 40 600" preserveAspectRatio="none"><path d="M 0 0 C 16 60,-16 120,0 180 S 16 300,0 360 S -16 480,0 600" fill="none" stroke="#FFE1B8" stroke-width="8" stroke-linecap="round" opacity=".7"/></svg></div>
+  <div class="streamer" style="right:15%;--dur:11s;--del:-7s;--r0:-4deg;--r1:6deg"><svg viewBox="-20 0 40 600" preserveAspectRatio="none"><path d="M 0 0 C -16 60,16 120,0 180 S -16 300,0 360 S 16 480,0 600" fill="none" stroke="#FF6BAE" stroke-width="10" stroke-linecap="round" opacity=".55"/></svg></div>
+  <div class="streamer" style="right:2%;--dur:10s;--del:-5s;--r0:7deg;--r1:-9deg"><svg viewBox="-20 0 40 600" preserveAspectRatio="none"><path d="M 0 0 C 16 60,-16 120,0 180 S 16 300,0 360 S -16 480,0 600" fill="none" stroke="#FFC9E0" stroke-width="9" stroke-linecap="round" opacity=".6"/></svg></div>
+
+  <!-- Tamagotchi device -->
+  <div id="tamaDevice" style="position:relative;z-index:1;width:min(92%,420px);height:calc(100dvh - 16px);max-height:820px;display:flex;flex-direction:column;background:linear-gradient(180deg,#FFE1B8 0%,#FFC9E0 55%,#FF6BAE 100%);border:5px solid #FF2D78;border-radius:52px 52px 64px 64px;box-shadow:0 7px 0 #CC0060,0 12px 0 #FF2D78,0 22px 36px rgba(255,45,120,.4),inset 0 3px 0 rgba(255,255,255,.55);overflow:hidden;">
+
+    <!-- Speaker grille -->
+    <div style="flex-shrink:0;padding:10px 0 6px;display:flex;justify-content:center;align-items:center;background:transparent;">
+      <svg width="64" height="10" viewBox="0 0 64 10">
+        <circle cx="6"  cy="5" r="2.8" fill="#FF2D78" opacity=".5"/>
+        <circle cx="18" cy="5" r="2.8" fill="#FF2D78" opacity=".5"/>
+        <circle cx="30" cy="5" r="2.8" fill="#FF2D78" opacity=".5"/>
+        <circle cx="42" cy="5" r="2.8" fill="#FF2D78" opacity=".5"/>
+        <circle cx="54" cy="5" r="2.8" fill="#FF2D78" opacity=".5"/>
+      </svg>
+    </div>
+
+    <!-- Screen bezel top -->
+    <div style="flex-shrink:0;margin:0 14px;background:#FF2D78;border-radius:16px 16px 0 0;border:4px solid #CC0060;border-bottom:none;padding:6px 6px 0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 6px;">
+        <div class="console-brand">✦ Kyoong Web Cam</div>
+        <div class="console-hearts"><span>♥</span><span>♥</span><span>♥</span></div>
+      </div>
+    </div>
+
+    <!-- Screen body -->
+    <div style="flex:1 1 0;min-height:0;margin:0 14px;position:relative;display:flex;flex-direction:column;background:#FFF6D9;border-left:4px solid #CC0060;border-right:4px solid #CC0060;overflow:hidden;">
+
+      <!-- Side grips left -->
+      <div style="position:absolute;left:-18px;top:50%;transform:translateY(-50%);z-index:10;display:flex;flex-direction:column;gap:8px;">
+        <div style="width:14px;height:44px;background:linear-gradient(180deg,#FFD9EB,#FF6BAE);border-radius:7px 0 0 7px;border:3px solid #FF2D78;border-right:none;box-shadow:inset 0 3px 0 rgba(255,255,255,.45)"></div>
+        <div style="width:14px;height:26px;background:linear-gradient(180deg,#FFD9EB,#FF6BAE);border-radius:7px 0 0 7px;border:3px solid #FF2D78;border-right:none;box-shadow:inset 0 3px 0 rgba(255,255,255,.45)"></div>
+      </div>
+      <!-- Side grips right -->
+      <div style="position:absolute;right:-18px;top:50%;transform:translateY(-50%);z-index:10;display:flex;flex-direction:column;gap:8px;">
+        <div style="width:14px;height:44px;background:linear-gradient(180deg,#FFD9EB,#FF6BAE);border-radius:0 7px 7px 0;border:3px solid #FF2D78;border-left:none;box-shadow:inset 0 3px 0 rgba(255,255,255,.45)"></div>
+        <div style="width:14px;height:26px;background:linear-gradient(180deg,#FFD9EB,#FF6BAE);border-radius:0 7px 7px 0;border:3px solid #FF2D78;border-left:none;box-shadow:inset 0 3px 0 rgba(255,255,255,.45)"></div>
+      </div>
+
+      <!-- Strip area -->
+      <div class="strip-area" style="flex:1 1 0;min-height:0;position:relative;background:linear-gradient(180deg,#FFF6D9 0%,#FFE1B8 100%);overflow:hidden;">
+
+        <!-- Frame thumbnail (top-right corner) -->
+        <div class="frame-thumb-overlay">
+          <div class="frame-thumb-box" id="frameThumbnail">
+            <div class="lock-inner">
+              <svg width="20" height="20" viewBox="0 0 16 16" style="image-rendering:pixelated;display:inline-block;vertical-align:middle">
+                <g fill="#1A0033"><rect x="5" y="2" width="6" height="1"/><rect x="4" y="3" width="1" height="4"/><rect x="11" y="3" width="1" height="4"/><rect x="5" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="2" y="7" width="12" height="1"/><rect x="2" y="13" width="12" height="1"/><rect x="1" y="8" width="1" height="5"/><rect x="14" y="8" width="1" height="5"/></g>
+                <rect x="2" y="8" width="12" height="5" fill="#FFEC00"/>
+                <rect x="7" y="9" width="2" height="2" fill="#1A0033"/>
+                <rect x="7" y="11" width="2" height="2" fill="#1A0033"/>
+                <rect x="2" y="8" width="2" height="1" fill="#FFF6D9"/>
+              </svg>
+              <span style="font-family:'Press Start 2P',monospace;font-size:4px;color:#FFF6D9;letter-spacing:1px">ROLL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo strip -->
+        <div class="photo-strip-live" id="photoStrip">
+          <div class="strip-slot" id="slot0"><span>slot 1</span></div>
+          <div class="strip-slot" id="slot1"><span>slot 2</span></div>
+          <div class="strip-slot" id="slot2"><span>slot 3</span></div>
+          <div class="strip-slot" id="slot3"><span>slot 4</span></div>
+          <div class="no-cam-strip" id="noCamPanel">
+            <span class="ncs-icon">📷</span>
+            <span>ENABLE<br/>CAMERA</span>
+          </div>
+        </div>
+
+        <!-- Result overlay -->
+        <div class="result-overlay" id="resultOverlay">
+          <div class="result-title">🎉 Strip Complete!</div>
+          <div class="final-strip-wrap" id="finalStripWrap" style="aspect-ratio:1/3"><span>FINAL STRIP</span></div>
+
+          <button class="tama-btn b-dl" style="max-width:180px" onclick="downloadStrip()">
+            <div class="cap"></div>
+            <span class="lbl-in" style="display:flex;align-items:center;gap:5px">
+              <svg width="20" height="20" viewBox="0 0 16 16" style="image-rendering:pixelated;display:inline-block;vertical-align:middle"><g fill="#1A0033"><rect x="2" y="3" width="12" height="1"/><rect x="1" y="4" width="1" height="8"/><rect x="14" y="4" width="1" height="8"/><rect x="2" y="12" width="12" height="1"/></g><rect x="2" y="4" width="12" height="8" fill="#FFB3D0"/><g fill="#1A0033"><rect x="3" y="5" width="10" height="1"/><rect x="3" y="8" width="10" height="1"/><rect x="3" y="6" width="1" height="2"/><rect x="12" y="6" width="1" height="2"/></g><rect x="4" y="6" width="8" height="2" fill="#FFF6D9"/><rect x="5" y="7" width="6" height="1" fill="#FF2D78"/><rect x="5" y="10" width="1" height="1" fill="#FFEC00"/><rect x="10" y="10" width="1" height="1" fill="#FFEC00"/></svg>
+              Save
+            </span>
+          </button>
+
+          <button class="tama-btn b-reset" style="max-width:180px;margin-top:4px" onclick="newSession()">
+            <div class="cap"></div>
+            <span class="lbl-in" style="display:flex;align-items:center;gap:5px">
+              <svg width="20" height="20" viewBox="0 0 16 16" style="image-rendering:pixelated;display:inline-block;vertical-align:middle"><g fill="#1A0033"><rect x="5" y="3" width="6" height="1"/><rect x="3" y="4" width="2" height="1"/><rect x="11" y="4" width="2" height="1"/><rect x="2" y="5" width="1" height="2"/><rect x="13" y="5" width="1" height="2"/><rect x="1" y="7" width="1" height="3"/><rect x="14" y="7" width="1" height="3"/><rect x="2" y="10" width="1" height="2"/><rect x="13" y="10" width="1" height="2"/><rect x="3" y="12" width="2" height="1"/><rect x="11" y="12" width="2" height="1"/><rect x="5" y="13" width="6" height="1"/></g><g fill="#7DD9FF"><rect x="5" y="4" width="6" height="1"/><rect x="3" y="5" width="10" height="2"/><rect x="2" y="7" width="12" height="3"/><rect x="3" y="10" width="10" height="2"/><rect x="5" y="12" width="6" height="1"/></g><rect x="5" y="6" width="6" height="5" fill="#FFF6D9"/><rect x="4" y="7" width="8" height="3" fill="#FFF6D9"/><g fill="#1A0033"><rect x="10" y="4" width="1" height="3"/><rect x="11" y="5" width="1" height="1"/><rect x="9" y="5" width="1" height="1"/></g></svg>
+              Reset
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen bezel bottom -->
+    <div style="flex-shrink:0;margin:0 14px;background:#FF2D78;border:4px solid #CC0060;border-top:none;border-radius:0 0 12px 12px;height:6px;"></div>
+
+    <!-- Control panel -->
+    <div class="bottom-bar" style="flex-shrink:0;background:transparent;border-top:none;padding:6px 12px 4px;">
+      <div class="bottom-info">
+        <div class="shot-counter" id="shotCounter">00 / 04</div>
+        <div class="frame-info-compact">
+          <div style="display:flex;align-items:baseline;gap:6px;width:100%;">
+            <div class="fi-status" id="fiStatus">NO FRAME</div>
+            <div class="fi-name empty" id="fiName">— — —</div>
+          </div>
+          <div class="roll-blink" id="rollBlink">▶ ROLL FIRST!</div>
+        </div>
+      </div>
+
+      <div class="bottom-buttons">
+        <!-- Roll -->
+        <button class="tama-btn b-gacha" id="btnRoll" onclick="doRoll()">
+          <div class="cap"></div>
+          <span class="lbl-in" style="display:flex;align-items:center;gap:5px">
+            <svg width="20" height="20" viewBox="0 0 16 16" style="image-rendering:pixelated;display:inline-block;vertical-align:middle"><g fill="#1A0033"><rect x="3" y="2" width="10" height="1"/><rect x="2" y="3" width="1" height="10"/><rect x="13" y="3" width="1" height="10"/><rect x="3" y="13" width="10" height="1"/></g><rect x="3" y="3" width="10" height="10" fill="#FFF6D9"/><rect x="3" y="3" width="10" height="1" fill="#FFFFFF"/><rect x="3" y="3" width="1" height="10" fill="#FFFFFF"/><rect x="3" y="12" width="10" height="1" fill="#FFE1B8"/><rect x="12" y="3" width="1" height="10" fill="#FFE1B8"/><g fill="#FF2D78"><rect x="5" y="5" width="2" height="2"/><rect x="9" y="5" width="2" height="2"/><rect x="7" y="7" width="2" height="2"/><rect x="5" y="9" width="2" height="2"/><rect x="9" y="9" width="2" height="2"/></g></svg>
+            Roll
+          </span>
+        </button>
+
+        <!-- Camera -->
+        <button class="tama-btn b-cam" id="btnCam" onclick="toggleCam()">
+          <div class="cap"></div>
+          <span class="lbl-in">
+            <svg width="20" height="20" viewBox="0 0 16 16" style="image-rendering:pixelated;display:inline-block;vertical-align:middle"><g fill="#1A0033"><rect x="5" y="3" width="2" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="4" height="1"/><rect x="1" y="5" width="3" height="1"/><rect x="11" y="5" width="4" height="1"/><rect x="1" y="6" width="1" height="7"/><rect x="14" y="6" width="1" height="7"/><rect x="1" y="13" width="14" height="1"/></g><rect x="2" y="6" width="12" height="7" fill="#FF2D78"/><rect x="4" y="5" width="3" height="1" fill="#FF2D78"/><rect x="7" y="5" width="4" height="1" fill="#FF2D78"/><g fill="#1A0033"><rect x="6" y="7" width="4" height="1"/><rect x="6" y="11" width="4" height="1"/><rect x="5" y="8" width="1" height="3"/><rect x="10" y="8" width="1" height="3"/></g><rect x="6" y="8" width="4" height="3" fill="#7DD9FF"/><rect x="7" y="9" width="2" height="1" fill="#1A0033"/><rect x="6" y="8" width="1" height="1" fill="#FFF6D9"/><rect x="12" y="7" width="1" height="1" fill="#FFEC00"/></svg>
+          </span>
+        </button>
+
+        <!-- Delete -->
+        <button class="tama-btn b-del" id="btnDelete" disabled onclick="deleteShot()">
+          <div class="cap"></div>
+          <span class="lbl-in">
+            <svg width="20" height="20" viewBox="0 0 16 16" style="image-rendering:pixelated;display:inline-block;vertical-align:middle"><g fill="#1A0033"><rect x="6" y="2" width="4" height="1"/><rect x="3" y="4" width="10" height="1"/><rect x="4" y="5" width="1" height="9"/><rect x="11" y="5" width="1" height="9"/><rect x="5" y="13" width="6" height="1"/></g><rect x="5" y="5" width="6" height="8" fill="#FFF6D9"/><rect x="6" y="6" width="1" height="6" fill="#1A0033"/><rect x="8" y="6" width="1" height="6" fill="#1A0033"/><rect x="10" y="6" width="1" height="6" fill="#1A0033"/><rect x="5" y="5" width="1" height="1" fill="#FFB3D0"/></svg>
+          </span>
+        </button>
+
+        <!-- Photo -->
+        <button class="tama-btn b-snap" id="btnSnap" disabled onclick="takePhoto()">
+          <div class="cap"></div>
+          <span class="lbl-in" style="display:flex;align-items:center;gap:5px">
+            <svg width="20" height="20" viewBox="0 0 16 16" style="image-rendering:pixelated;display:inline-block;vertical-align:middle"><g fill="#1A0033"><rect x="7" y="1" width="2" height="1"/><rect x="7" y="14" width="2" height="1"/><rect x="1" y="7" width="1" height="2"/><rect x="14" y="7" width="1" height="2"/></g><g fill="#FFEC00"><rect x="7" y="2" width="2" height="12"/><rect x="2" y="7" width="12" height="2"/></g><rect x="6" y="6" width="4" height="4" fill="#FFB3D0"/><rect x="3" y="3" width="1" height="1" fill="#FF2D78"/><rect x="12" y="3" width="1" height="1" fill="#FF2D78"/><rect x="3" y="12" width="1" height="1" fill="#FF2D78"/><rect x="12" y="12" width="1" height="1" fill="#FF2D78"/><rect x="7" y="7" width="2" height="2" fill="#FFFFFF"/></svg>
+            PHOTO
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Bumper bar -->
+    <div style="flex-shrink:0;padding:6px 20px 14px;display:flex;align-items:center;justify-content:space-between;background:transparent;">
+      <div class="bumper"></div>
+      <div class="console-brand-bottom">KYOONG ★ 2025</div>
+      <div class="bumper"></div>
+    </div>
+
+  </div><!-- end tamaDevice -->
+</div>
+
+<!-- ══════════════════════════════════════════
+     GACHA OVERLAY
+══════════════════════════════════════════ -->
+<div class="gacha-overlay" id="gachaOverlay" onclick="closeGacha()">
+  <div class="g-card gc-cute" id="gachaCard" onclick="event.stopPropagation()">
+    <div class="card-shine"></div>
+    <div class="card-rarity" id="cardRarity">✦ CUTE ✦</div>
+
+    <!-- Frame preview: size set dynamically in doRoll() to match the frame's aspect ratio -->
+    <img id="cardIconImg"
+      style="width:64px;height:192px;border-radius:6px;border:3px solid #1A0033;
+             box-shadow:3px 3px 0 #1A0033;margin-bottom:10px;display:block;
+             object-fit:contain;"
+      src="" alt="frame preview">
+
+    <div class="card-name cn-cute" id="cardName">0506 BBH</div>
+
+    <button class="btn-use bu-cute" id="btnUse" onclick="useFrame()">
+      <div class="cap"></div>
+      <span class="lbl-in">✦ Use this frame! ✦</span>
+    </button>
+  </div>
+</div>
+
+<video id="camVideo" style="display:none" autoplay playsinline muted></video>
+<canvas id="captureCanvas" style="display:none"></canvas>
+
+<script src="js/app.js"></script>
+</body>
+</html>
